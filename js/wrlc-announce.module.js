@@ -1,6 +1,6 @@
 angular
   // Define the module name
-  .module('helloWorld', [])
+  .module('wrlcAnnounce', [])
     .component('prmSearchBarAfter', {
       template: `
 	    <wrlc-announce>
