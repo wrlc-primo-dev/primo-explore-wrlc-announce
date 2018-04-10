@@ -1,0 +1,22 @@
+{
+  "name": "primo-explore-wrlc-announce",
+  "version": "1.0.0",
+  "description": "\"Add announcement bar under search bar in Primo\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wrlc-primo-dev/primo-explore-wrlc-announce.git"
+  },
+  "keywords": [
+    "primo-explore"
+  ],
+  "author": "Ian Hardy",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/wrlc-primo-dev/primo-explore-wrlc-announce/issues"
+  },
+  "homepage": "https://github.com/wrlc-primo-dev/primo-explore-wrlc-announce#readme"
+}
