@@ -29,6 +29,7 @@ Add `wrlcAnnounce` as a dependency for your custom module definition.
 var app = angular.module('viewCustom', ['wrlcAnnounce'])
 ```
 Configure your API calls to retrieve announcements. primo-explore-wrlc-announce has the following configuration options
+
 | name | type | usage |
 |---|---|---|
 | `announceAPI` | string | A url that can be used to fetch your announcement data. |
