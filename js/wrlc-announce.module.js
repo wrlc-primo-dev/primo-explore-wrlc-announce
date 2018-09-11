@@ -13,8 +13,8 @@ angular.module('wrlcAnnounce', ['ngAnimate'])
         <span ng-if="!$ctrl.link" ng-bind-html=$ctrl.message id="message"></span>
         <button id="dismiss-announcement" area-label="dismiss announcement" type="button" ng-click="$ctrl.wrDismiss()"
               class="dismiss-alert-button zero-margin md-button md-primoExplore-theme md-ink-ripple button-with-icon">
-        <prm-icon icon-type="svg" svg-icon-set="navigation" icon-definition="ic_close_24px" class="material-icons gray"></prm-icon>
-      </button>
+          <prm-icon icon-type="svg" svg-icon-set="navigation" icon-definition="ic_close_24px" class="material-icons gray"></prm-icon>
+        </button>
       </div>
     </wrlc-announce>
   `,
@@ -26,7 +26,7 @@ angular.module('wrlcAnnounce', ['ngAnimate'])
       // interact with announceAPI helper to set values
       $http.get(config.announceAPI)
         .then(function(response){
-          var data = config.getData(response);
+          var data = (config.getData)? config.getData(response) : response;
 
           // Test if we want to show the banner or not
           var showFlagEnabled = config.getShow(data) == "TRUE";
@@ -36,7 +36,7 @@ angular.module('wrlcAnnounce', ['ngAnimate'])
           // get message info using configured functions
           self.message = config.getMessage(data);
           self.link = config.getLink(data);
-          self.severity = config.getSeverity(data);
+          self.severity = (config.getSeverity)? config.getSeverity(data) : 'info';
         });
 
       //respond to user exing out of the banner

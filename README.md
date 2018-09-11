@@ -32,13 +32,15 @@ Configure your API calls to retrieve announcements. `primo-explore-wrlc-announce
 
 | name | type | usage |
 |---|---|---|
-| `announceAPI` | string | A url that can be used to fetch your announcement data. |
+| `announceAPI`* | string | A url that can be used to fetch your announcement data. |
+| `getShow`* | function | A function that returns TRUE if you want to show your announcement banner. |
+| `getMessage`* | function | A function that returns the message text you want to display. |
+| `getLink`* | function | A function that returns a link you want to add the the Message text. |
 | `apiEntryNumber` | int | The id of the zero-indexed row you'd like information for (if you have multiple rows in your Google Sheet) |
-| `getData` | function | A function that gets at the main data element shared by each of the following |
+| `getData` | function | A function that gets at the main data element shared by each of the following (defaulted to the raw 'response'.)|
 | `getSeverity` | function | A function that returns the severity of the message (e.g. 'success', 'info', 'warn', 'alert') |
-| `getShow` | function | A function that returns TRUE if you want to show your announcement banner. |
-| `getMessage` | function | A function that returns the message text you want to display. |
-| `getLink` | function | A function that returns a link you want to add the the Message text. |
+
+_note: options marked with an asterisk ('*') are required_
 
 ## Example
 
