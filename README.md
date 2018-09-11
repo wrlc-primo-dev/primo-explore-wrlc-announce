@@ -44,7 +44,7 @@ _note: options marked with an asterisk ('*') are required_
 
 ## Example
 
-The following would be added to a secondary `custom.module.js` (or similarly named) file after the module is installed.
+The following would be added to a secondary `wrlc-announce-config.module.js` (or similarly named) file after the module is installed.
 
 This example uses Google Sheets as the source for the announcement data.
 
@@ -90,13 +90,13 @@ This example uses Google Sheets as the source for the announcement data.
 |id |show_banner|message_severity|message_text|message_link|
 |:--|:----------|:---------------|:-----------|:-----------|
 |0  | TRUE | info | This is the first message text | http://thelink.com/1 |
-|1  | FALSE| warn | An example of warning text | http://thelink.com/2 |
-|2  | TRUE | success | You're getting it! (Hopefully) | http://theotherlink.com/3 |
+|1  | FALSE| warn | An example of warning text | http://theotherlink.com/2 |
+|2  | TRUE | success | You're getting it! (Hopefully) | http://yetanotherlink.com/3 |
 |3  | TRUE | alert | If you're not, open up an issue and we'll help out! | https://github.com/wrlc-primo-dev/primo-explore-wrlc-announce/issues |
 
 2. Go to 'File > Publish to the Web'. Select the relevant sheet and 'Web Page', then click publish. Copy and paste the link it shows you to make sure it works.
 
-3. In your new `custom.module.js` file, set the `announceAPI` variable to match
+3. In your new `wrlc-announce-config.module.js` file, set the `announceAPI` variable to match
   `'https://spreadsheets.google.com/feeds/list/<SHEET_ID>/1/public/values?alt=json'`
   replacing `<SHEET_ID>` with what's matching from the link at the top of your browser:
   `https://docs.google.com/spreadsheets/d/<SHEET_ID>/edit`
