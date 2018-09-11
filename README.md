@@ -55,7 +55,7 @@ This example uses Google Sheets as the source for the announcement data.
       // - helper code for announcement banner ['wrlcAnnounce'] - //
       app.constant('announceConfig', {
 
-        // view/edit the values in the regular view by using the same 'id' (/feeds/list<ID>/1/public below) in the following: (docs.google.com/spreadsheets/d/<SHEET_ID>)
+        // view/edit the values in google spreadsheets regular view by using the same 'SHEET_ID' in the following: (docs.google.com/spreadsheets/d/<SHEET_ID>/edit)
         announceAPI: 'https://spreadsheets.google.com/feeds/list/1dhGFCdOYlEG-DxkNs5F94WnHEmEIyTllQKhhWWtmmIE/1/public/values?alt=json',
 
         // specify which of the N 'entries' (rows) you want the info for [defaulted to 0]
@@ -82,3 +82,21 @@ This example uses Google Sheets as the source for the announcement data.
       });
 
 ```
+
+## Setting up Google Sheets as the `announceAPI` data source
+
+1. Create a new google sheet with the following general format:
+
+|id |show_banner|message_severity|message_text|message_link|
+|:--|:----------|:---------------|:-----------|:-----------|
+|0  | TRUE | info | This is the first message text | http://thelink.com/1 |
+|1  | FALSE| warn | An example of warning text | http://thelink.com/2 |
+|2  | TRUE | success | You're getting it! (Hopefully) | http://theotherlink.com/3 |
+|3  | TRUE | alert | If you're not, open up an issue and we'll help out! | https://github.com/wrlc-primo-dev/primo-explore-wrlc-announce/issues |
+
+2. Go to 'File > Publish to the Web'. Select the relevant sheet and 'Web Page', then click publish. Copy and paste the link it shows you to make sure it works.
+
+3. In your new `custom.module.js` file, set the `announceAPI` variable to match
+  `'https://spreadsheets.google.com/feeds/list/<SHEET_ID>/1/public/values?alt=json'`
+  replacing `<SHEET_ID>` with what's matching from the link at the top of your browser:
+  `https://docs.google.com/spreadsheets/d/<SHEET_ID>/edit`
