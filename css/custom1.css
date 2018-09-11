@@ -25,3 +25,15 @@ prm-search-bar {
 #wrlc-announce-icon {
 	margin-right:12px;
 }
+
+.warn #wrlc-announce-banner {
+  background-color: lightyellow;
+}
+
+.success #wrlc-announce-banner {
+  background-color: lightgreen;
+}
+
+.alert #wrlc-announce-banner {
+  background-color: lightcoral;
+}
