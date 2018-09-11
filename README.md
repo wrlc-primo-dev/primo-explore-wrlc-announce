@@ -28,32 +28,55 @@ Add `wrlcAnnounce` as a dependency for your custom module definition.
 ```js
 var app = angular.module('viewCustom', ['wrlcAnnounce'])
 ```
-Configure your API calls to retrieve announcements. primo-explore-wrlc-announce has the following configuration options
+Configure your API calls to retrieve announcements. `primo-explore-wrlc-announce` has the following configuration options
 
 | name | type | usage |
 |---|---|---|
 | `announceAPI` | string | A url that can be used to fetch your announcement data. |
+| `apiEntryNumber` | int | The id of the zero-indexed row you'd like information for (if you have multiple rows in your Google Sheet) |
+| `getData` | function | A function that gets at the main data element shared by each of the following |
+| `getSeverity` | function | A function that returns the severity of the message (e.g. 'success', 'info', 'warn', 'alert') |
 | `getShow` | function | A function that returns TRUE if you want to show your announcement banner. |
 | `getMessage` | function | A function that returns the message text you want to display. |
 | `getLink` | function | A function that returns a link you want to add the the Message text. |
 
 ## Example
 
-The following would be added to the custom.js file after the module installed. This example uses Google Sheets as the source for the announcement data.
+The following would be added to a secondary `custom.module.js` (or similarly named) file after the module is installed.
+
+This example uses Google Sheets as the source for the announcement data.
 
 ```js
-    var app = angular.module('viewCustom', ['angularLoad', 'wrlcAnnounce']);
-    
-    app.constant('announceConfig', {
-        announceAPI: 'https://spreadsheets.google.com/feeds/list/1ycVxLuY5LYwsFbGX-n_TlJPAF-wI73Lf_aJiZKzm0vI/1/public/values?alt=json',
-        getShow: function(response) {
-            return(response.data.feed.entry[0].gsx$show.$t);
+      //load app 'viewCustom' as a module with [] dependencies
+      var app = angular.module('viewCustom', ['angularLoad', 'wrlcAnnounce']);
+
+      // - helper code for announcement banner ['wrlcAnnounce'] - //
+      app.constant('announceConfig', {
+
+        // view/edit the values in the regular view by using the same 'id' (/feeds/list<ID>/1/public below) in the following: (docs.google.com/spreadsheets/d/<SHEET_ID>)
+        announceAPI: 'https://spreadsheets.google.com/feeds/list/1dhGFCdOYlEG-DxkNs5F94WnHEmEIyTllQKhhWWtmmIE/1/public/values?alt=json',
+
+        // specify which of the N 'entries' (rows) you want the info for [defaulted to 0]
+        apiEntryNumber: 0,
+
+        // get the main data object associated with your desired view
+        getData: function(response) {
+          return response.data.feed.entry[this.apiEntryNumber];
         },
-        getMessage: function(response) {
-            return(response.data.feed.entry[0].gsx$message.$t);
+
+        // obtain the specifically relevant parts of that data object
+        getShow: function(data) {
+          return data.gsx$showbanner.$t;
         },
-        getLink: function(response) {
-            return(response.data.feed.entry[0].gsx$link.$t);
+        getMessage: function(data) {
+          return data.gsx$messagetext.$t;
+        },
+        getLink: function(data) {
+          return data.gsx$messagelink.$t;
+        },
+        getSeverity: function(data) {
+          return data.gsx$messageseverity.$t;
         }
-    });
+      });
+
 ```
